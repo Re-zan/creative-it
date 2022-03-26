@@ -3,6 +3,8 @@
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Backend\LeedController;
+use App\Http\Controllers\Backend\SeminarController;
 use App\Http\Controllers\fronntend\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,13 @@ Route::resource('banner', BannerController::class);
 ROute::GET('about_status/{id}', [AboutController::class, 'status'])->name('about_status');
 Route::resource('about', AboutController::class);
 
+//semina routes
+Route::GET('seminar/join', [SeminarController::class, 'join'])->name('seminar/join');
+Route::resource('seminar', SeminarController::class);
+Route::resource('seminar/leed', LeedController::class);
+
 //gallery Routes
 Route::GET('galler_status/{id}',[GalleryController::class, 'status'])->name('gallery_status');
 Route::resource('gallery', GalleryController::class);
+
+

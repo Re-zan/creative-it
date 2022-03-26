@@ -29,7 +29,7 @@
                         @error('about_title')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        <textarea name="about_details" id="summernote" class="form-control my-3">{{ $about->about_details }}</textarea>
+                        <textarea name="about_details" class="form-control my-3">{{ $about->about_details }}</textarea>
 
 
                         @error('about_details')

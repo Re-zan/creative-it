@@ -10,7 +10,7 @@
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
 
 
     <link rel="stylesheet" href="{{ asset('backend/vendors/font-awesome/css/font-awesome.min.css') }}">
@@ -26,6 +26,7 @@
 
 
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
+
 
 
 
@@ -61,11 +62,8 @@
                     <h3 class="menu-title">Pages</h3><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon ti-save-alt"></i>
-                            Banner
-                        </a>
-                        <ul class="sub-menu children dropdown-menu">
+
+                        <ul>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ route('banner.create') }}">Add
                                     banner
                                     item</a></li>
@@ -75,11 +73,8 @@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon ti-bookmark-alt"></i>
-                            About
-                        </a>
-                        <ul class="sub-menu children dropdown-menu">
+
+                        <ul>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ route('about.create') }}">Add
                                     About
                                     item</a></li>
@@ -89,18 +84,30 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon ti-layers-alt"></i>
-                            Gallery
-                        </a>
-                        <ul class="sub-menu children dropdown-menu">
+
+                        <ul>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a
                                     href="{{ route('gallery.create') }}">Add
                                     Gallery
                                     item</a></li>
                             <li><i class="menu-icon ti-split-h"></i><a href="{{ route('gallery.index') }}">All
                                     Gallery
+                                    item</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+
+                        <ul>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a
+                                    href="{{ route('seminar.create') }}">Add
+                                    Seminar
+                                    item</a></li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="{{ route('seminar.index') }}">All
+                                    Seminar
                                     item</a>
                             </li>
                         </ul>
@@ -282,9 +289,12 @@
         {{-- missing piece --}}
         <div class="content mt-3">
             @yield('content')
+
         </div>
         <!-- .content -->
-    </div><!-- /#right-panel -->
+    </div>
+
+    <!-- /#right-panel -->
 
     <!-- Right Panel -->
 
@@ -292,10 +302,10 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+    <script src="{{ asset('backend/css/jquery-3.5.1.min.js') }}"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
@@ -315,11 +325,6 @@
 
     <script src="{{ asset('backend/js/jquery.vmap.world.js') }}"></script>
 
-
-    @yield("cust_js")
-    <script>
-        $('header').hide()
-    </script>
 
 </body>
 
