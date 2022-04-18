@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Carbon\Carbon;
-use App\Models\Leed;
-use App\Models\Seminar;
+use App\Models\Footer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SeminarController extends Controller
+class FooterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        $seminar = Seminar::with('leeds')->select('id', 'topic')->where('status', 1)->get();
-     
-        return view('Backend.Seminar.index', compact('seminar'));
+        //
     }
 
     /**
@@ -29,7 +25,7 @@ class SeminarController extends Controller
      */
     public function create()
     {
-        return view('Backend.Seminar.Create');
+        return view('Backend.Footer.create');
     }
 
     /**
@@ -40,23 +36,27 @@ class SeminarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation process
         $request->validate([
-            'topic' => 'required|unique:seminars,topic',
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required',
+            'footer_tag_title' => 'required',
+            'footer_text' => 'required',
+            'footer_link_text' => 'required',
+            'footer_contact_text' => 'required',
+            'footer_fb_link' => 'required',
+            'footer_youtube_link' => 'required',
+            'footer_linkedIn_link' => 'required',
+            'footer_insta_link' => 'required',
         ]);
-
-       $date = Carbon::parse($request->date)->format('d M Y, l');
-       $time = Carbon::parse($request->time)->format('h:i, A');
-      
-
-        //insert process
-        $seminar = new Seminar();
-        $seminar->topic = $request->topic;
-        $seminar->date = $date;
-        $seminar->time = $time;
-        $seminar->save();
+        //insert 
+        $footer = new Footer();
+        $footer->footer_tag_title = $request->footer_tag_title;
+        $footer->footer_text = $request->footer_text;
+        $footer->footer_link_text = $request->footer_link_text;
+        $footer->footer_contact_text = $request->footer_contact_text;
+        $footer->footer_fb_link = $request->footer_fb_link;
+        $footer->footer_youtube_link = $request->footer_youtube_link;
+        $footer->footer_linkedIn_link = $request->footer_linkedIn_link;
+        $footer->footer_insta_link = $request->footer_insta_link;
+        $footer->save();
         return back();
     }
 
@@ -103,11 +103,5 @@ class SeminarController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function join()
-    {
-        $seminar = Seminar::select('id', 'topic')->where('status','1')->get();
-        return view('Frontend.Seminar_join', compact('seminar'));
     }
 }

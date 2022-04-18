@@ -451,3 +451,108 @@ button:focus {
     border-radius: 0;
 }
 /*============= News Part Goes Here ======================*/
+
+.courses_tab {
+    margin: 60px 0;
+}
+
+.courses_tab ul {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.courses_tab ul li {
+    display: inline-block;
+    width: 33.33%;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+
+}
+
+.courses_tab ul li a span {
+    display: block;
+    color: #444;
+    padding-top: 10px;
+}
+
+.courses_tab ul li a {
+    font-size: 14px;
+    color: #444;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 0 0 10px 0;
+    border-radius: 0px !important;
+    display: block;
+}
+
+.courses_tab ul li a.active span {
+    color: #fff;
+}
+
+.courses_tab .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #ee2e24;
+}
+
+.courses_tab_sidebar {
+    margin: 60px 0;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-right: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+}
+
+.course_items h3 {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Arimo', sans-serif;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.course_items p {
+    font-size: 16px;
+    color: #444;
+    font-weight: 400;
+    font-family: 'Arimo', sans-serif;
+    line-height: 28px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.course_items a {
+    color: #ee2e24;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Arimo', sans-serif;
+    text-transform: capitalize;
+    padding-left: 20px;
+
+}
+
+.seat {
+    background: #49596d;
+    padding-top: 10px;
+    line-height: 46px;
+    height: 46px;
+    margin-top: 28px;
+    border-radius: 0px 46px 46px 0px;
+    width: 270px;
+
+
+}
+
+.seat img {
+    padding-right: 10px;
+}
+
+.seat p a {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+    font-family: 'Arimo', sans-serif;
+}

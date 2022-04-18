@@ -45,7 +45,7 @@
                                     class="btn btn-sm  bg-success text-white">
                                     Edit
                                 </a>
-                                <button class="btn__delete btn btn-sm bg-danger text-white">Delete</button>
+                                <button class="btn btn-sm bg-danger text-white del__button">Delete</button>
                                 <form class="d-inline-block del__form"
                                     action="{{ route('banner.destroy', $bannerdata->id) }}" method="POST">
                                     @csrf
@@ -60,10 +60,33 @@
 
 
                 </tbody>
-            </table>
 
+            </table>
+            <span>
+                {{ $banner->links() }}
+            </span>
 
 
         </div>
     </div>
+@endsection
+@section('cust_js')
+    <script>
+        jQuery('.del__button').click(function() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    jQuery(this).next('.del__form').submit()
+
+                }
+            })
+        });
+    </script>
 @endsection

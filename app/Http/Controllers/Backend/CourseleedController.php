@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Carbon\Carbon;
-use App\Models\Leed;
-use App\Models\Seminar;
+use App\Models\Courseleed;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
-class SeminarController extends Controller
+class CourseleedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        $seminar = Seminar::with('leeds')->select('id', 'topic')->where('status', 1)->get();
-     
-        return view('Backend.Seminar.index', compact('seminar'));
+        //
     }
 
     /**
@@ -29,7 +26,7 @@ class SeminarController extends Controller
      */
     public function create()
     {
-        return view('Backend.Seminar.Create');
+       
     }
 
     /**
@@ -40,23 +37,31 @@ class SeminarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation process
         $request->validate([
-            'topic' => 'required|unique:seminars,topic',
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required',
+            'course_title' => 'required',
+            'course_description' => 'required',
+            'course_img' => 'required',
         ]);
 
-       $date = Carbon::parse($request->date)->format('d M Y, l');
-       $time = Carbon::parse($request->time)->format('h:i, A');
-      
+        //img upload 
+        $extension = $request->course_img->getclientoriginalextension();
+        $new_name= 'Course'.uniqid().'.'.$extension;
+        $path = public_path().'/storage/img';
+        
 
-        //insert process
-        $seminar = new Seminar();
-        $seminar->topic = $request->topic;
-        $seminar->date = $date;
-        $seminar->time = $time;
-        $seminar->save();
+        if(!File::exists($path)){
+            mkdir($path);
+        }
+
+        $file_upload = $request->course_img->move($path, $new_name);
+        
+        //insert
+        $courseleed = new Courseleed();
+       $courseleed->course_id = $request->course_id;
+        $courseleed->course_title = $request->course_title;
+        $courseleed->course_description = $request->course_description;
+        $courseleed->course_img =$new_name;
+        $courseleed->save();
         return back();
     }
 
@@ -103,11 +108,5 @@ class SeminarController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function join()
-    {
-        $seminar = Seminar::select('id', 'topic')->where('status','1')->get();
-        return view('Frontend.Seminar_join', compact('seminar'));
     }
 }

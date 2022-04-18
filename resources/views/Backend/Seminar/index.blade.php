@@ -24,22 +24,23 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Serial NO</th>
-                                    <th scope="col">Topic</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Time</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">number</th>
+                                    <th scope="col">address</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($seminar->leeds as $leeddata)
+                                @foreach ($seminar_topic->leeds as $leeddata)
+                                    <tr>
+                                        <td>{{ $leeddata->name }}</td>
+                                        <td>{{ $leeddata->email }}</td>
+                                        <td>{{ $leeddata->number }}</td>
+                                        <td>{{ $leeddata->address }}</td>
+                                    </tr>
                                 @endforeach
-                                <tr>
-                                    <td>{{ $leeddata->name }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+
 
 
 

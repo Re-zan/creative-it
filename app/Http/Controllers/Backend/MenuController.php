@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Carbon\Carbon;
-use App\Models\Leed;
-use App\Models\Seminar;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SeminarController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        $seminar = Seminar::with('leeds')->select('id', 'topic')->where('status', 1)->get();
-     
-        return view('Backend.Seminar.index', compact('seminar'));
+        //
     }
 
     /**
@@ -29,7 +25,7 @@ class SeminarController extends Controller
      */
     public function create()
     {
-        return view('Backend.Seminar.Create');
+        return view('Backend.Menu.create');
     }
 
     /**
@@ -40,24 +36,16 @@ class SeminarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation process
         $request->validate([
-            'topic' => 'required|unique:seminars,topic',
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required',
+                'menu_name' => 'required',
+                'menu_link' => 'required',
         ]);
-
-       $date = Carbon::parse($request->date)->format('d M Y, l');
-       $time = Carbon::parse($request->time)->format('h:i, A');
-      
-
-        //insert process
-        $seminar = new Seminar();
-        $seminar->topic = $request->topic;
-        $seminar->date = $date;
-        $seminar->time = $time;
-        $seminar->save();
-        return back();
+        //insert
+        $menu = new Menu();
+            $menu->menu_name = $request->menu_name;
+            $menu->menu_link = $request->menu_link;
+            $menu->save();
+            return back();
     }
 
     /**
@@ -103,11 +91,5 @@ class SeminarController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function join()
-    {
-        $seminar = Seminar::select('id', 'topic')->where('status','1')->get();
-        return view('Frontend.Seminar_join', compact('seminar'));
     }
 }

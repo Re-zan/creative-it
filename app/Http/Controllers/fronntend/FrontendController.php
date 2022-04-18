@@ -4,6 +4,7 @@ namespace App\Http\Controllers\fronntend;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Course;
 use App\Models\Gallery;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class FrontendController extends Controller
         $allabout = About::where('status', '1')->latest()->limit(1)->get();
         $allgallery = Gallery::where('status', '1')->latest()->limit(6)->get();
         $allseminar = Seminar::where('status', '1')->latest()->limit(4)->get();
+        $allcourse = Course::with('leeds')->select('id','course_icon','course_name')->latest()->limit(9)->get();
         
-        return view('Frontend.index' , compact('Allbanner' , 'allabout', 'allgallery', 'allseminar'));
+        
+        return view('Frontend.index' , compact('Allbanner' , 'allabout', 'allgallery', 'allseminar', 'allcourse'));
     }
 }

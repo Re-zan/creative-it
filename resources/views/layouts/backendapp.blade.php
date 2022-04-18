@@ -70,6 +70,10 @@
                             <li><i class="menu-icon ti-split-h"></i><a href="{{ route('banner.index') }}">All banner
                                     item</a>
                             </li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="{{ route('banner.trash') }}">All banner
+                                    Trash
+                                    item</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -108,6 +112,60 @@
                                     item</a></li>
                             <li><i class="menu-icon ti-split-h"></i><a href="{{ route('seminar.index') }}">All
                                     Seminar
+                                    item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+
+                        <ul>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a
+                                    href="{{ route('course.create') }}">Add
+                                    Course
+                                    item</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ route('course_topic') }}">Add
+                                    Course Detsils
+                                    item</a></li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="">All
+                                    Course
+                                    item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+
+                        <ul>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a
+                                    href="{{ route('header.create') }}">Add
+                                    Header
+                                    item</a></li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="">All
+                                    Header
+                                    item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+
+                        <ul>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ route('menu.create') }}">Add
+                                    Menu
+                                    item</a></li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="">All
+                                    Menu
+                                    item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+
+                        <ul>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a
+                                    href="{{ route('footer.create') }}">Add
+                                    Footer
+                                    item</a></li>
+                            <li><i class="menu-icon ti-split-h"></i><a href="">All
+                                    Footer
                                     item</a>
                             </li>
                         </ul>
@@ -325,6 +383,7 @@
 
     <script src="{{ asset('backend/js/jquery.vmap.world.js') }}"></script>
 
+    @yield('cust_js')
 
 </body>
 

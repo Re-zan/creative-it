@@ -14,10 +14,14 @@
     <link href="//fonts.googleapis.com/css?family=Arimo:400,700&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link href="{{ asset('frontend/css/slick.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/lightbox.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/meanmenu.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/font/flaticon.css') }}">
+
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/media.css') }}" rel="stylesheet" />
 
@@ -31,17 +35,15 @@
             <div class="row mx-0">
                 <div class="col-lg-2 col-sm-3 px-0">
                     <div class="news-title">
-                        <p>Latest News</p>
+                        <p>{{ $header->notice_title }}</p>
+
                     </div>
                 </div>
                 <div class="col-lg-10 col-sm-9 px-0">
                     <div class="news-details">
-                        <p class="marquee">Creative IT Institute, one of the leading IT training institutes in
-                            Bangladesh offers the best training opportunities. It has been playing a vital role to
-                            eradicate the unemployment problem since 2008. Enriched with quality training this institute
-                            has never failed to help the individuals to reveal their talents making harmony between
-                            creativity and IT. No matter what is your background, we are offering 30 courses for you
-                            conducted by experienced trainers to advance your skills.</p>
+                        <p class="marquee">
+                            {{ $header->notice }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -52,8 +54,8 @@
     <!--============== Navbar Part Goes Here ================-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="https://creativeitinstitutectg.com">
-                <img src="https://creativeitinstitutectg.com/storage/logo/logo_6055bcd524c62.png" alt="logo">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('storage/img/' . $header->logo) }}" alt="logo">
                 <span style="font-family: 'Ubuntu Condensed', sans-serif; color: #666; font-weight: 400;"> &nbsp;|
                     Chattogram</span>
             </a>
@@ -64,28 +66,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://creativeitinstitutectg.com">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://creativeitinstitutectg.com#about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://creativeitinstitutectg.com#courses">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://creativeitinstitutectg.com#gallery">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://creativeitinstitutectg.com#footer">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://creativeitinstitute.com/">Dhaka
-                            Branch</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link seminar-click" href="https://creativeitinstitutectg.com#seminar">Seminar</a>
-                    </li>
+                    @foreach ($menu as $menudata)
+                        <li class="nav-item">
+                            <a class="nav-link {{ $menu->last()->id == $menudata->id ? 'seminar-click' : '' }} "
+                                href="{{ $menudata->menu_link }}">{{ $menudata->menu_name }}</a>
+                        </li>
+                    @endforeach
+
+
                 </ul>
             </div>
         </div>
@@ -103,15 +91,14 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="conatct-left footer-logo text-center">
                         <img src="https://creativeitinstitutectg.com/storage/logo/logo_6055bd628a508.png" alt="logo">
-                        <h4>CHANGE I GROW I SUCCEED</h4>
+                        <h4>{{ $footer->footer_tag_title }}</h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 pt-sm-4 pt-md-0 offset-lg-1">
                     <div class="addres-main">
                         <div class="address">
                             <h3>Address</h3>
-                            <p>9 No, Kapasgola Road (4th Floor),<br>
-                                Chawk Bazar, Telpotti More, Chattogram 4203, Bangladesh
+                            <p>{{ $footer->footer_text }}
                             </p>
                         </div>
                     </div>
@@ -120,19 +107,21 @@
                     <div class="contact-right">
                         <div class="address">
                             <h3>Contact</h3>
-                            <h5>ctg@creativeitinstitute.com</h5>
-                            <p>+880 1847422965, +880 1847422959</p>
-                            <p>+880 1847422966 </p>
+                            <h5>{{ $footer->footer_link_text }}</h5>
+                            <p>{{ $footer->footer_contact_text }}
+                            </p>
+
+
                         </div>
                         <div class="social">
-                            <a href="https://www.facebook.com/CITI.Chattogram" target="_blank"><i
-                                    class="fa fa-facebook-f" aria-hidden="true"></i></a>
-                            <a href="https://www.youtube.com/channel/UCWxEU-3nFwQ95_VniFMU4Ng" target="_blank"><i
+                            <a href="{{ $footer->footer_fb_link }}" target="_blank"><i class="fa fa-facebook-f"
+                                    aria-hidden="true"></i></a>
+                            <a href="{{ $footer->footer_youtube_link }}" target="_blank"><i
                                     class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                            <a href="https://www.linkedin.com/company/75671629/admin" target="_blank"><i
-                                    class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="https://www.instagram.com/creativeitinstitutechattogram/" target="_blank"><i
-                                    class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="{{ $footer->footer_linkedIn_link }}" target="_blank"><i class="fa fa-linkedin"
+                                    aria-hidden="true"></i></a>
+                            <a href="{{ $footer->footer_insta_link }}" target="_blank"><i class="fa fa-instagram"
+                                    aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -161,10 +150,13 @@
 
 
     <script src="{{ asset('frontend/js/jquery-1.12.4.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
     <script src="{{ asset('frontend/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.meanmenu.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.marquee.min.js') }}"></script>
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
 

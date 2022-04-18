@@ -17,7 +17,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner = Banner::orderBy('created_at', 'DESC')->get();
+        $banner = Banner::orderBy('created_at', 'DESC')->paginate(4);
        
         return view('Backend.Banner.indexbanner', compact('banner'));
     }
@@ -149,10 +149,7 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banner= Banner::find($id);
-        $path = public_path(). '/storage/img/'.$banner->banner_image;
-        if(File::exists($path)){
-            unlink($path);
-        }
+       
         $banner->delete();
         return back();
     }
@@ -167,5 +164,30 @@ class BannerController extends Controller
     }
     $banner->save();
    return back();
+    }
+
+
+    public function trash()
+    {
+        $banner = Banner::onlyTrashed()->get(); 
+        return view('Backend.Banner.trash' , compact('banner'));
+    }
+
+    public function parmanentdelete($id)
+    {
+        $banner = Banner::onlyTrashed()->findorfail($id);
+        $path = public_path(). '/storage/img/'.$banner->banner_image;
+        if(File::exists($path)){
+            unlink($path);
+        }
+        $banner->forceDelete();
+        return back();
+    }
+
+    public function restore($id)
+    {
+        $banner = Banner::onlyTrashed()->findOrFail($id);
+        $banner->restore();
+        return back();
     }
 }

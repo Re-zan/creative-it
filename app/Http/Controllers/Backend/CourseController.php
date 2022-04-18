@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Carbon\Carbon;
-use App\Models\Leed;
-use App\Models\Seminar;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SeminarController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        $seminar = Seminar::with('leeds')->select('id', 'topic')->where('status', 1)->get();
-     
-        return view('Backend.Seminar.index', compact('seminar'));
+        
     }
 
     /**
@@ -29,7 +25,7 @@ class SeminarController extends Controller
      */
     public function create()
     {
-        return view('Backend.Seminar.Create');
+        return view('Backend.Course.create');
     }
 
     /**
@@ -40,23 +36,15 @@ class SeminarController extends Controller
      */
     public function store(Request $request)
     {
-        //validation process
         $request->validate([
-            'topic' => 'required|unique:seminars,topic',
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required',
+            'course_icon' => 'required',
+            'course_name' => 'required'
         ]);
-
-       $date = Carbon::parse($request->date)->format('d M Y, l');
-       $time = Carbon::parse($request->time)->format('h:i, A');
-      
-
-        //insert process
-        $seminar = new Seminar();
-        $seminar->topic = $request->topic;
-        $seminar->date = $date;
-        $seminar->time = $time;
-        $seminar->save();
+        //insert 
+        $course = new Course();
+        $course->course_icon = $request->course_icon;
+        $course->course_name = $request->course_name;
+        $course->save();
         return back();
     }
 
@@ -104,10 +92,11 @@ class SeminarController extends Controller
     {
         //
     }
-
-    public function join()
+    public function coursede()
     {
-        $seminar = Seminar::select('id', 'topic')->where('status','1')->get();
-        return view('Frontend.Seminar_join', compact('seminar'));
+        $course=Course::select('id', 'course_name')->get();
+        
+        return view('Backend.Course.couse_details', compact('course'));
     }
+    
 }
